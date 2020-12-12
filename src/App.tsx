@@ -32,7 +32,6 @@ import {
   FieldAttributes,
 } from "formik";
 import { useState } from "react";
-import deepMap from "deep-map";
 
 const multistepForm = [
   {

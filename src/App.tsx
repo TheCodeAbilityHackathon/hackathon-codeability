@@ -11,53 +11,95 @@ import {
   Select,
   RadioGroup,
   Stack,
-  Radio,
   Checkbox,
   CheckboxGroup,
   Button,
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+  HStack,
+  Radio,
+  list,
 } from "@chakra-ui/react";
 import theme from "./theme";
+import {
+  Formik,
+  Form,
+  Field,
+  FieldProps,
+  useField,
+  FieldAttributes,
+} from "formik";
 import { useState } from "react";
+import deepMap from "deep-map";
 
-type DisabilityCategory =
-  | "movement"
-  | "intellectual"
-  | "sight"
-  | "mental"
-  | "hearing"
-  | "speech";
-
-const DISABILITY_CATEGORIES: Array<{
-  value: DisabilityCategory;
-  label: string;
-}> = [
-  { value: "movement", label: "Ruchową" },
-  { value: "intellectual", label: "Intelektualną" },
-  { value: "sight", label: "Wzroku" },
-  { value: "mental", label: "Choroba Psychiczna" },
-  { value: "hearing", label: "Słuchu" },
-  { value: "speech", label: "Mowy" },
+const multistepForm = [
+  {
+    value: "movement",
+    label: "Ruchową",
+    options: [
+      { value: "limbs", label: "Brak kończyn lub ich części", options: [] },
+      {
+        value: "nervous_system",
+        label: "Uszkodzenia układu nerwowego",
+        options: [
+          { value: "brain", label: "Mózgowe porażenie dziecięce", options: [] },
+          { value: "muscle", label: "Rdzeniowy zanik mięśni", options: [] },
+          {
+            value: "heine_medina",
+            label: "choroby Heinego-Medina",
+            options: [],
+          },
+          {
+            value: "multiple_sclerosis",
+            label: "stwardnienie rozsiane",
+            options: [],
+          },
+        ],
+      },
+      {
+        value: "skeleton",
+        label: "Niepoprawne uformowanie szkieletu",
+        options: [],
+      },
+      { value: "joints", label: "Uszkodzenia stawów", options: [] },
+    ],
+  },
+  { value: "intellectual", label: "Intelektualną", options: [] },
+  { value: "sight", label: "Wzroku", options: [] },
+  { value: "mental", label: "Choroba Psychiczna", options: [] },
+  { value: "hearing", label: "Słuchu", options: [] },
+  { value: "speech", label: "Mowy", options: [] },
 ];
 
-//Movement categories
+const BooleanQuestionField = ({ label, name, ...props }: any) => {
+  const [field, meta, helpers] = useField<"yes" | "no">(name);
 
-type MovementCategory = "limbs" | "nervous_system" | "skeleton" | "joints";
-
-const MOVEMENT_CATEGORIES: Array<{
-  value: MovementCategory;
-  label: string;
-}> = [
-  { value: "limbs", label: "Brak kończyn lub ich części" },
-  { value: "nervous_system", label: "Uszkodzenia układu nerwowego" },
-  { value: "skeleton", label: "Niepoprawne uformowanie szkieletu" },
-  { value: "joints", label: "Uszkodzenia stawów" },
-];
+  return (
+    <FormControl as="fieldset">
+      <FormLabel htmlFor={field.name} as="legend">
+        {label}
+      </FormLabel>
+      <RadioGroup
+        {...field}
+        onChange={(value: "yes" | "no") => {
+          props?.onChange(value);
+          helpers.setValue(value);
+        }}
+        id={field.name}
+      >
+        <HStack spacing="24px">
+          <Radio value="yes">Tak</Radio>
+          <Radio value="no">Nie</Radio>
+        </HStack>
+      </RadioGroup>
+    </FormControl>
+  );
+};
 
 export const App = () => {
-  const [categories, setCategories] = useState<DisabilityCategory[]>([]);
-  const [categoriesMovement, setCategoriesMovement] = useState<
-    MovementCategory[]
-  >([]);
+  const [index, setIndex] = useState(0);
 
   return (
     <ChakraProvider theme={extendTheme(theme)}>
@@ -71,73 +113,54 @@ export const App = () => {
               </Heading>
               <Text>
                 Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore veritatis et quasi architecto beatae
-                vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                voluptas sit aspernatur aut odit aut fugit, sed quia
-                consequuntur magni dolores eos qui ratione voluptatem sequi
-                nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor
-                sit amet, consectetur, adipisci velit, sed quia
+                accusantium doloremque laudantium, totam rem aperiam.
               </Text>
             </VStack>
 
             <VStack mt="8" spacing={16}>
-              <VStack spacing={4}>
-                <Heading as="h2" size="md">
-                  Jakie masz niepełnosprawności
-                </Heading>
-                <Stack direction="row">
-                  <CheckboxGroup
-                    value={categories}
-                    colorScheme="green"
-                    onChange={(value) =>
-                      setCategories(value as DisabilityCategory[])
-                    }
-                  >
-                    {DISABILITY_CATEGORIES.map((category) => (
-                      <Checkbox value={category.value}>
-                        {category.label}
-                      </Checkbox>
-                    ))}
-                  </CheckboxGroup>
-                </Stack>
-                {categories.includes("movement") && (
-                  <>
-                    <Heading as="h2" size="md">
-                      Jakiego typu?
-                    </Heading>
-                    <Stack direction="column">
-                      <CheckboxGroup
-                        value={categories}
-                        colorScheme="green"
-                        onChange={(value) =>
-                          setCategoriesMovement(value as MovementCategory[])
-                        }
-                      >
-                        {MOVEMENT_CATEGORIES.map((category) => (
-                          <Checkbox value={category.value}>
-                            {category.label}
-                          </Checkbox>
-                        ))}
-                      </CheckboxGroup>
-                    </Stack>
-                  </>
-                )}
-              </VStack>
-              <VStack spacing={4}>
-                <Heading as="h2" size="md">
-                  Jakie są twoje zainteresowania?
-                </Heading>
-                <RadioGroup defaultValue="0">
-                  <Stack direction="column">
-                    <Select placeholder="Wybierz" size="lg" />
-                  </Stack>
-                </RadioGroup>
+              <VStack spacing={4} mb={8}>
+                <Formik
+                  initialValues={{}}
+                  onSubmit={(values, actions) => {
+                    console.log("submit", values);
+                  }}
+                >
+                  <Form>
+                    {/* <Field name={multistepForm[index].value}>
+                      {({ field, form }: FieldProps) => (
+                        
+                        <Button type="button" onClick={() => {}}>Yes</Button>
+                        <Button type="button" onClick={() => {}}>No</Button>
+                        <FormControl
+                          isInvalid={Boolean(
+                            form.errors.name && form.touched.name
+                          )}
+                        >
+                          <FormLabel htmlFor={field.name}>First name</FormLabel>
+                          <Input
+                            {...field}
+                            value={field.value || ""}
+                            id={field.name}
+                            placeholder="Name..."
+                          />
+                          <FormErrorMessage>
+                            {form.errors.name}
+                          </FormErrorMessage>
+                        </FormControl>
+                      )}
+                    </Field> */}
+                    <Button
+                      type="submit"
+                      borderRadius={50}
+                      colorScheme="pink"
+                      size="lg"
+                    >
+                      SUBMIT
+                    </Button>
+                  </Form>
+                </Formik>
               </VStack>
             </VStack>
-            <Button borderRadius={50} colorScheme="pink" size="lg">
-              Pokaż firmy w których
-            </Button>
           </Container>
         </Grid>
       </Box>

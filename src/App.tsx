@@ -14,6 +14,7 @@ import {
   Radio,
   Checkbox,
   CheckboxGroup,
+  Button,
 } from "@chakra-ui/react";
 import theme from "./theme";
 import { useState } from "react";
@@ -134,6 +135,9 @@ export const App = () => {
                 </RadioGroup>
               </VStack>
             </VStack>
+            <Button borderRadius={50} colorScheme="pink" size="lg">
+              Pokaż firmy w których
+            </Button>
           </Container>
         </Grid>
       </Box>

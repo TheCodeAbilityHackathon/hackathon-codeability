@@ -1,0 +1,18 @@
+[
+  {
+    "label": "Projektowanie",
+    "value": "design"
+  },
+  {
+    "label": "Nauki ścisłe",
+    "value": "sciences"
+  },
+  {
+    "label": "Programowanie",
+    "value": "programming"
+  },
+  {
+    "label": "Opieka nad innymi",
+    "value": "Caretaker"
+  }
+]

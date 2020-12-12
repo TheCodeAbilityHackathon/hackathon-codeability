@@ -32,48 +32,24 @@ import {
   FieldAttributes,
 } from "formik";
 import { useState } from "react";
+import { getFlatOptions, getNextBranchId } from "./utils";
+import disabilities from "./data/disabilities.json";
 
-const multistepForm = [
-  {
-    value: "movement",
-    label: "Ruchową",
-    options: [
-      { value: "limbs", label: "Brak kończyn lub ich części", options: [] },
-      {
-        value: "nervous_system",
-        label: "Uszkodzenia układu nerwowego",
-        options: [
-          { value: "brain", label: "Mózgowe porażenie dziecięce", options: [] },
-          { value: "muscle", label: "Rdzeniowy zanik mięśni", options: [] },
-          {
-            value: "heine_medina",
-            label: "choroby Heinego-Medina",
-            options: [],
-          },
-          {
-            value: "multiple_sclerosis",
-            label: "stwardnienie rozsiane",
-            options: [],
-          },
-        ],
-      },
-      {
-        value: "skeleton",
-        label: "Niepoprawne uformowanie szkieletu",
-        options: [],
-      },
-      { value: "joints", label: "Uszkodzenia stawów", options: [] },
-    ],
-  },
-  { value: "intellectual", label: "Intelektualną", options: [] },
-  { value: "sight", label: "Wzroku", options: [] },
-  { value: "mental", label: "Choroba Psychiczna", options: [] },
-  { value: "hearing", label: "Słuchu", options: [] },
-  { value: "speech", label: "Mowy", options: [] },
-];
+const flatOptions = getFlatOptions(disabilities);
+const ids = flatOptions.map(({ value }) => value);
 
-const BooleanQuestionField = ({ label, name, ...props }: any) => {
+const BooleanQuestionField = ({
+  label,
+  name,
+  onChange,
+}: {
+  label: string;
+  name: string;
+  onChange(value: "yes" | "no"): void;
+}) => {
   const [field, meta, helpers] = useField<"yes" | "no">(name);
+  console.log(field);
+  console.log(field.value);
 
   return (
     <FormControl as="fieldset">
@@ -83,7 +59,7 @@ const BooleanQuestionField = ({ label, name, ...props }: any) => {
       <RadioGroup
         {...field}
         onChange={(value: "yes" | "no") => {
-          props?.onChange(value);
+          onChange && onChange(value);
           helpers.setValue(value);
         }}
         id={field.name}
@@ -98,7 +74,9 @@ const BooleanQuestionField = ({ label, name, ...props }: any) => {
 };
 
 export const App = () => {
-  const [index, setIndex] = useState(0);
+  const [currentId, setCurrentId] = useState<string>(ids[0]);
+  const [finishedStep, setFinishedStep] = useState<boolean>(false);
+  const currentOption = flatOptions.find(({ value }) => value === currentId);
 
   return (
     <ChakraProvider theme={extendTheme(theme)}>
@@ -125,6 +103,25 @@ export const App = () => {
                   }}
                 >
                   <Form>
+                    {currentOption && (
+                      <BooleanQuestionField
+                        name={currentOption.value}
+                        label={currentOption.label}
+                        onChange={(value) => {
+                          const nextId = getNextBranchId(
+                            value !== "yes",
+                            ids,
+                            currentId
+                          );
+
+                          if (!nextId) {
+                            setFinishedStep(true);
+                          } else {
+                            setCurrentId(nextId);
+                          }
+                        }}
+                      />
+                    )}
                     {/* <Field name={multistepForm[index].value}>
                       {({ field, form }: FieldProps) => (
                         

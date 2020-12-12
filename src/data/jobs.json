@@ -1,0 +1,30 @@
+[
+  {
+    "label": "Specjalista ds marketingu",
+    "value": "marketing_specialist"
+  },
+  {
+    "label": "Badacz",
+    "value": "scientist"
+  },
+  {
+    "label": "Specjalista HR",
+    "value": "hr_specialist"
+  },
+  {
+    "label": "UX Designer",
+    "value": "ux_designer"
+  },
+  {
+    "label": "UI Developer",
+    "value": "ui_developer"
+  },
+  {
+    "label": "Scrum Master",
+    "value": "scrum_master"
+  },
+  {
+    "label": "Programista",
+    "value": "software_engineer"
+  }
+]

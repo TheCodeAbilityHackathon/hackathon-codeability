@@ -1,0 +1,50 @@
+[
+  {
+    "value": "movement",
+    "label": "Ruchową",
+    "options": [
+      {
+        "value": "limbs",
+        "label": "Brak kończyn lub ich części",
+        "options": []
+      },
+      {
+        "value": "nervous_system",
+        "label": "Uszkodzenia układu nerwowego",
+        "options": [
+          {
+            "value": "brain",
+            "label": "Mózgowe porażenie dziecięce",
+            "options": []
+          },
+          {
+            "value": "muscle",
+            "label": "Rdzeniowy zanik mięśni",
+            "options": []
+          },
+          {
+            "value": "heine_medina",
+            "label": "choroby Heinego-Medina",
+            "options": []
+          },
+          {
+            "value": "multiple_sclerosis",
+            "label": "stwardnienie rozsiane",
+            "options": []
+          }
+        ]
+      },
+      {
+        "value": "skeleton",
+        "label": "Niepoprawne uformowanie szkieletu",
+        "options": []
+      },
+      { "value": "joints", "label": "Uszkodzenia stawów", "options": [] }
+    ]
+  },
+  { "value": "intellectual", "label": "Intelektualną", "options": [] },
+  { "value": "sight", "label": "Wzroku", "options": [] },
+  { "value": "mental", "label": "Choroba Psychiczna", "options": [] },
+  { "value": "hearing", "label": "Słuchu", "options": [] },
+  { "value": "speech", "label": "Mowy", "options": [] }
+]

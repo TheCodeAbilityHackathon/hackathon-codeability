@@ -30,7 +30,9 @@ export const LandingPage = () => {
             <Button to="/znajdz-zawod" as={Link} variant="ghost">
               Znajdź zawód
             </Button>
-            <Button variant="ghost">Mentoring</Button>
+            <Button disabled variant="ghost">
+              Mentoring
+            </Button>
             <Button
               as={ChakraLink}
               isExternal

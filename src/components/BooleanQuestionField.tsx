@@ -1,6 +1,6 @@
 import * as React from "react";
 import { VStack, HStack } from "@chakra-ui/react";
-import { Button } from "./Button";
+import { ButtonTeal } from "./Button";
 
 export const BooleanQuestionField = ({
   onClick,
@@ -10,12 +10,12 @@ export const BooleanQuestionField = ({
   return (
     <VStack spacing={8}>
       <HStack spacing="24px">
-        <Button onClick={() => onClick(true)} type="button">
+        <ButtonTeal onClick={() => onClick(true)} type="button">
           Tak
-        </Button>
-        <Button onClick={() => onClick(false)} type="button">
+        </ButtonTeal>
+        <ButtonTeal onClick={() => onClick(false)} type="button">
           Nie
-        </Button>
+        </ButtonTeal>
       </HStack>
     </VStack>
   );

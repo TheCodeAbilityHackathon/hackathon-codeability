@@ -13,7 +13,7 @@ import { getFlatOptions, getNextBranchId } from "../../utils";
 import disabilities from "../../data/disabilities.json";
 import { BooleanQuestionField } from "../../components/BooleanQuestionField";
 import { Page } from "../../components/Page";
-import { Button } from "../../components/Button";
+import { ButtonTeal } from "../../components/Button";
 import { QuestionnaireProvider, useQuestionnaireState } from "./context";
 import interests from "../../data/interests.json";
 import { HTMLMotionProps, motion } from "framer-motion";
@@ -144,13 +144,13 @@ const StepStart = () => {
             </Text>
           </Container>
         </Center>
-        <Button
+        <ButtonTeal
           onClick={() => {
             setStep("interests");
           }}
         >
           Zaczynajmy!
-        </Button>
+        </ButtonTeal>
       </VStack>
     </StepAnimate>
   );
@@ -171,7 +171,7 @@ const StepInterests = () => {
         </Heading>
         <Center>
           <Container maxWidth="70ch">
-            <Text fontSize="2xl">Możesz zaznczyć kilka opcji</Text>
+            <Text fontSize="2xl">Możesz zaznaczyć wiele opcji</Text>
           </Container>
         </Center>
 
@@ -197,13 +197,13 @@ const StepInterests = () => {
             );
           })}
         </Flex>
-        <Button
+        <ButtonTeal
           onClick={() => {
             setStep("disabilities");
           }}
         >
           Dalej
-        </Button>
+        </ButtonTeal>
       </VStack>
     </StepAnimate>
   );

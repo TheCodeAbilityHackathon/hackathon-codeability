@@ -12,3 +12,17 @@ export const Button: React.FC<ButtonProps> = (props) => {
     />
   );
 };
+
+export const ButtonTeal: React.FC<ButtonProps> = (props) => {
+  return (
+    <ChakraButton
+      px={16}
+      borderRadius={50}
+      color="brand.300"
+      fontWeight="bold"
+      colorScheme="brandTeal"
+      size="lg"
+      {...props}
+    />
+  );
+};

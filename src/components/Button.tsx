@@ -1,7 +1,7 @@
 import React from "react";
-import { Button as ChakraButton, ButtonProps } from "@chakra-ui/react";
+import { Button as ChakraButton } from "@chakra-ui/react";
 
-export const Button: React.FC<ButtonProps> = (props) => {
+export const Button: typeof ChakraButton = (props) => {
   return (
     <ChakraButton
       px={16}
@@ -13,7 +13,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
   );
 };
 
-export const ButtonTeal: React.FC<ButtonProps> = (props) => {
+export const ButtonTeal: typeof ChakraButton = (props) => {
   return (
     <ChakraButton
       px={16}

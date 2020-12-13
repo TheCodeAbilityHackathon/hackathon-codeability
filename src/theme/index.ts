@@ -25,6 +25,10 @@ const theme = {
       '#userwayAccessibilityIcon': {
         top: '56px !important',
         right: '60px !important',
+        
+      },
+      '#userwayAccessibilityIcon > span > .accessibility-btn span': {
+        fontWeight: 'bold !important'
       }
     }
   },

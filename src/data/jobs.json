@@ -1,30 +1,70 @@
 [
   {
     "label": "Specjalista ds marketingu",
-    "value": "marketing_specialist"
+    "value": "marketing_specialist",
+    "description": "Specjalista ds marketingu zajmuje się badaniami marketingowymi, zarządzaniem marką, reklamą, public relations i publicity oraz nadzoruje firmy dostarczające produkty i usługi marketingowe.",
+    "cannot_perform_with_disabilities": [
+      "movement.nervous_system",
+      "movement.nervous_system.brain",
+      "movement.nervous_system.muscle",
+      "movement.nervous_system.heine_medina",
+      "movement.nervous_system.multiple_sclerosis",
+      "movement.joints",
+      "speech"
+    ],
+    "can_perform_with_interests": ["design", "caretaker"]
   },
   {
     "label": "Badacz",
-    "value": "scientist"
+    "value": "scientist",
+    "description": "Może określić koniec badań na podstawie tego, że nowe informacje, które uzyskuje, nie wnoszą nic nowego; gdy wyniki podobne powtarzają się. ... Przechodzi przez etapy opracowania materiałów naukowych, określenia wyników częściowych i pojawienia się z nich wyników końcowych.",
+    "cannot_perform_with_disabilities": ["intellectual"],
+    "can_perform_with_interests": [
+      "programming",
+      "diy",
+      "electronics",
+      "sciences"
+    ]
   },
   {
     "label": "Specjalista HR",
-    "value": "hr_specialist"
+    "value": "hr_specialist",
+    "description": "Jego zadaniem jest kierowanie karierą pracowników oraz zarządzanie zasobami ludzkimi. Może pracować właściwie w każdej firmie lub prowadzić własną działalność i wykonywać zlecenia dla przedsiębiorstw.",
+    "cannot_perform_with_disabilities": ["speech"],
+    "can_perform_with_interests": ["caretaker"]
   },
   {
-    "label": "UX Designer",
-    "value": "ux_designer"
-  },
-  {
-    "label": "UI Developer",
-    "value": "ui_developer"
+    "label": "UX Designer & UI Developer",
+    "value": "ux_ui_designer",
+    "description": "Pdpowiada za projektowanie doświadczeń odbiorcy od podstaw. Jego celem jest zwiększenie satysfakcji klienta korzystającego z produktu poprzez poprawę jego funkcjonalności i użyteczności, dostarczenie produktu łatwego w obsłudze, zapewnienie “przyjemnych” interakcji między klientem, a produktem.",
+    "cannot_perform_with_disabilities": ["sight"],
+    "can_perform_with_interests": [
+      "design",
+      "film",
+      "programming",
+      "art",
+      "diy",
+      "photography"
+    ]
   },
   {
     "label": "Scrum Master",
-    "value": "scrum_master"
+    "value": "scrum_master",
+    "description": "jest odpowiedzialny za sukces Scruma w Twojej organizacji, jakby banalnie to nie brzmiało. ... Dla Zespołu Deweloperskiego, Scrum Master jest nawigatorem w drodze do samoorganizacji, liderem wspierającym (ang. Servant Leader), coachem, mentorem. Chroni Zespół i usuwa przeszkody na jego drodze.",
+    "cannot_perform_with_disabilities": ["speech"],
+    "can_perform_with_interests": ["caretaker"]
   },
   {
     "label": "Programista",
-    "value": "software_engineer"
+    "value": "software_engineer",
+    "description": "Programista to osoba, która za pomocą specjalistycznego języka pisze, czyli tworzy, programy użytkowe i nadzoruje proces ich wdrażania. Język, którym posługuje się programista w procesie wytwarzania oprogramowania to zbiór określonych reguł, pozwalających na stworzenie gotowego programu.",
+    "cannot_perform_with_disabilities": [],
+    "show_always": true,
+    "can_perform_with_interests": [
+      "programming",
+      "diy",
+      "electronics",
+      "sciences"
+    ]
   }
 ]

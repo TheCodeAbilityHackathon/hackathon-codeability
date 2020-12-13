@@ -3,7 +3,7 @@ import { getNextBranchId } from './';
 const ids = [
   "movement",
   "movement.limbs",
-  "nervous_system",
+  "movement.nervous_system",
   "movement.nervous_system.brain",
   "movement.nervous_system.muscle",
   "movement.nervous_system.heine_medina",
@@ -23,8 +23,13 @@ test("return next minor branch when value is true", () => {
 });
 
 test("return next major branch when value is false", () => {
-  const id = getNextBranchId(false, ids, ids[0]);
-  expect(id).toEqual("nervous_system");
+  const id = getNextBranchId(false, ids, ids[2]);
+  expect(id).toEqual("movement.skeleton");
+});
+
+test("return next major branch when value is false 2", () => {
+  const id = getNextBranchId(false, ids, ids[4]);
+  expect(id).toEqual("movement.nervous_system.heine_medina");
 });
 
 test("return undefined for last value", () => {

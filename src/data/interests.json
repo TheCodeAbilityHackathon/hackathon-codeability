@@ -4,15 +4,83 @@
     "value": "design"
   },
   {
-    "label": "Nauki ścisłe",
-    "value": "sciences"
+    "label": "Film",
+    "value": "film"
+  },
+  {
+    "label": "Gotowanie",
+    "value": "cooking"
   },
   {
     "label": "Programowanie",
     "value": "programming"
   },
   {
+    "label": "Sport",
+    "value": "sport"
+  },
+  {
     "label": "Opieka nad innymi",
-    "value": "Caretaker"
+    "value": "caretaker"
+  },
+  {
+    "label": "Sztuka",
+    "value": "art"
+  },
+  {
+    "label": "DIY",
+    "value": "diy"
+  },
+  {
+    "label": "Elektronika",
+    "value": "electronics"
+  },
+  {
+    "label": "Nauki Ścisłe",
+    "value": "sciences"
+  },
+  {
+    "label": "Muzyka",
+    "value": "music"
+  },
+  {
+    "label": "Taniec",
+    "value": "dance"
+  },
+  {
+    "label": "Podróże",
+    "value": "travelling"
+  },
+  {
+    "label": "Architektura",
+    "value": "architecture"
+  },
+  {
+    "label": "Pisanie",
+    "value": "writing"
+  },
+  {
+    "label": "Wędkarstwo",
+    "value": "fishing"
+  },
+  {
+    "label": "Moda",
+    "value": "fashion"
+  },
+  {
+    "label": "Fotografia",
+    "value": "photography"
+  },
+  {
+    "label": "Ogrodnictwo",
+    "value": "gardening"
+  },
+  {
+    "label": "Wolontariat",
+    "value": "charities"
+  },
+  {
+    "label": "Zwierzęta",
+    "value": "animals"
   }
 ]

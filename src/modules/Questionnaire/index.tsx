@@ -45,7 +45,9 @@ export const QuestionnairePage = () => {
                 transform="rotate(90deg)"
                 zIndex={-1}
               >
-                <BgIconLeft style={{ width: 230, height: 230 }} />
+                <AnimateComponent transition={{ duration: 0.7 }}>
+                  <BgIconLeft style={{ width: 230, height: 230 }} />
+                </AnimateComponent>
               </Box>
             </>
           ) : (
@@ -60,13 +62,19 @@ export const QuestionnairePage = () => {
                 }
               </Flex>
               <Box position="absolute" top="20%" right="18%" zIndex={-1}>
-                <BgWave style={{ width: 40, height: 40 }} />
+                <AnimateComponent transition={{ duration: 0.7 }}>
+                  <BgWave style={{ width: 40, height: 40 }} />
+                </AnimateComponent>
               </Box>
               <Box position="absolute" bottom="10%" left="5%" zIndex={-1}>
-                <BgIconLeft style={{ width: 230, height: 230 }} />
+                <AnimateComponent transition={{ delay: 0.2, duration: 0.6 }}>
+                  <BgIconLeft style={{ width: 230, height: 230 }} />
+                </AnimateComponent>
               </Box>
               <Box position="absolute" bottom="10%" right="10%" zIndex={-1}>
-                <BgIconRight style={{ width: 230, height: 230 }} />
+                <AnimateComponent transition={{ delay: 0.1, duration: 0.8 }}>
+                  <BgIconRight style={{ width: 230, height: 230 }} />
+                </AnimateComponent>
               </Box>
             </>
           )}
@@ -118,16 +126,18 @@ const StepResult = () => {
       </Box>
 
       <Grid templateColumns="repeat(2, 1fr)" gap={10}>
-        {suggestions.map((suggestion) => (
+        {suggestions.map((suggestion, i) => (
           <GridItem rowSpan={1}>
-            <ProfessionCard key={suggestion.value}>
-              <Heading as="h4" size="xl" mb={4}>
-                {suggestion.label}
-              </Heading>
-              <Text fontSize="md">
-                {suggestion.description.substring(0, 200) + "..."}
-              </Text>
-            </ProfessionCard>
+            <AnimateComponent transition={{ delay: 0.1 + i * 0.1 }}>
+              <ProfessionCard key={suggestion.value}>
+                <Heading as="h4" size="xl" mb={4}>
+                  {suggestion.label}
+                </Heading>
+                <Text fontSize="md">
+                  {suggestion.description.substring(0, 200) + "..."}
+                </Text>
+              </ProfessionCard>
+            </AnimateComponent>
           </GridItem>
         ))}
       </Grid>

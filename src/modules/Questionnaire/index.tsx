@@ -19,6 +19,9 @@ import interests from "../../data/interests.json";
 import { HTMLMotionProps, motion } from "framer-motion";
 import { TagButton } from "../../components/TagButton";
 import getJobSuggestion from "../../business_logic/getJobSuggestion";
+import { ReactComponent as BgWave } from "../../assets/icons_wave_top.svg";
+import { ReactComponent as BgIconRight } from "../../assets/icons_bottom_right.svg";
+import { ReactComponent as BgIconLeft } from "../../assets/icons_bottom_left.svg";
 
 const flatOptions = getFlatOptions(disabilities);
 const ids = flatOptions.map(({ value }) => value);
@@ -38,6 +41,15 @@ export const QuestionnairePage = () => {
               }[step]
             }
           </Flex>
+          <Box position="absolute" top="20%" right="18%" zIndex={-1}>
+            <BgWave style={{ width: 40, height: 40 }} />
+          </Box>
+          <Box position="absolute" bottom="10%" left="5%" zIndex={-1}>
+            <BgIconLeft style={{ width: 230, height: 230 }} />
+          </Box>
+          <Box position="absolute" bottom="10%" right="10%" zIndex={-1}>
+            <BgIconRight style={{ width: 230, height: 230 }} />
+          </Box>
         </Page>
       )}
     </QuestionnaireProvider>

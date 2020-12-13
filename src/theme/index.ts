@@ -20,6 +20,14 @@ const theme = {
   space: spacing,
   borders,
   transition,
+  styles: {
+    global: {
+      '#userwayAccessibilityIcon': {
+        top: '56px !important',
+        right: '60px !important',
+      }
+    }
+  },
 }
 
 export type Theme = typeof theme

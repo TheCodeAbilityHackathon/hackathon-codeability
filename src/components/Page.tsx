@@ -6,10 +6,10 @@ export const Page: React.FC<BoxProps> = ({ children, ...props }) => {
   return (
     <Box
       w="full"
-      pb="12"
-      pt="16"
+      pb="14"
+      pt="14"
       mx="auto"
-      maxW="75rem"
+      maxW={{ base: "75rem", md: "85rem" }}
       minH="100vh"
       px={{ base: "2", md: "6" }}
       {...props}

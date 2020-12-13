@@ -7,6 +7,8 @@ import {
   Center,
   Flex,
   Container,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { getFlatOptions, getNextBranchId } from "../../utils";
@@ -16,9 +18,11 @@ import { Page } from "../../components/Page";
 import { ButtonTeal } from "../../components/Button";
 import { QuestionnaireProvider, useQuestionnaireState } from "./context";
 import interests from "../../data/interests.json";
-import { HTMLMotionProps, motion } from "framer-motion";
 import { TagButton } from "../../components/TagButton";
 import getJobSuggestion from "../../business_logic/getJobSuggestion";
+import { AnimateComponent } from "../../components/AnimateComponent";
+import { ReactComponent as PersonSvg } from "../../assets/walking_person.svg";
+import { ProfessionCard } from "../../components/ProfessionCard";
 
 const flatOptions = getFlatOptions(disabilities);
 const ids = flatOptions.map(({ value }) => value);
@@ -28,30 +32,24 @@ export const QuestionnairePage = () => {
     <QuestionnaireProvider>
       {({ step }) => (
         <Page display="flex">
-          <Flex align="center" justify="center" textAlign="center" grow={1}>
-            {
+          {step === "result" ? (
+            <StepResult />
+          ) : (
+            <Flex align="center" justify="center" textAlign="center" grow={1}>
               {
-                start: <StepStart />,
-                interests: <StepInterests />,
-                disabilities: <StepDisabilities />,
-                result: <StepResult />,
-              }[step]
-            }
-          </Flex>
+                {
+                  start: <StepStart />,
+                  interests: <StepInterests />,
+                  disabilities: <StepDisabilities />,
+                }[step]
+              }
+            </Flex>
+          )}
         </Page>
       )}
     </QuestionnaireProvider>
   );
 };
-
-const StepAnimate = (props: HTMLMotionProps<"div">) => (
-  <motion.div
-    initial={{ y: -20, opacity: 0 }}
-    animate={{ y: 0, opacity: 1 }}
-    transition={{ duration: 0.6 }}
-    {...props}
-  />
-);
 
 const StepResult = () => {
   const { disabilities, chosenInterests } = useQuestionnaireState();
@@ -61,18 +59,54 @@ const StepResult = () => {
   });
 
   return (
-    <StepAnimate>
+    <AnimateComponent>
       <Box>
-        <VStack mt="8" spacing={16}>
-          {suggestions.map((suggestion) => (
-            <Box key={suggestion.value}>
-              <Text fontSize="md">{suggestion.label}</Text>
-              <Text fontSize="md">{suggestion.description}</Text>
+        <Box>
+          <Box
+            position="absolute"
+            width="100vw"
+            height="100vh"
+            overflow="hidden"
+          >
+            <Box
+              position="absolute"
+              left="calc(50% - 8rem)"
+              top="8rem"
+              zIndex={-1}
+            >
+              <AnimateComponent transition={{ delay: 0.1 }}>
+                <PersonSvg />
+              </AnimateComponent>
             </Box>
+          </Box>
+          <AnimateComponent>
+            <Box py="16rem">
+              <Heading as="h2" size="2xl">
+                Zawody które do Ciebie pasują
+              </Heading>
+              <Text fontSize="xl" mt={4}>
+                Wybierz ten który Cię zainteresował i dowiedz się więcej.
+              </Text>
+            </Box>
+          </AnimateComponent>
+        </Box>
+
+        <Grid templateColumns="repeat(2, 1fr)" gap={10}>
+          {suggestions.map((suggestion) => (
+            <GridItem rowSpan={1}>
+              <ProfessionCard key={suggestion.value}>
+                <Heading as="h4" size="xl" mb={4}>
+                  {suggestion.label}
+                </Heading>
+                <Text fontSize="md">
+                  {suggestion.description.substring(0, 200) + "..."}
+                </Text>
+              </ProfessionCard>
+            </GridItem>
           ))}
-        </VStack>
+        </Grid>
       </Box>
-    </StepAnimate>
+    </AnimateComponent>
   );
 };
 
@@ -82,7 +116,7 @@ const StepDisabilities = () => {
   const currentOption = flatOptions.find(({ value }) => value === currentId);
 
   return (
-    <StepAnimate>
+    <AnimateComponent>
       <Box>
         <VStack mt="8" spacing={16}>
           <Heading as="h2" size="xl">
@@ -110,7 +144,7 @@ const StepDisabilities = () => {
           </VStack>
         </VStack>
       </Box>
-    </StepAnimate>
+    </AnimateComponent>
   );
 };
 
@@ -118,7 +152,7 @@ const StepStart = () => {
   const { setStep } = useQuestionnaireState();
 
   return (
-    <StepAnimate>
+    <AnimateComponent>
       <VStack spacing={12}>
         <Heading as="h2" size="3xl">
           Znajdź zawód dla siebie!
@@ -140,7 +174,7 @@ const StepStart = () => {
           Zaczynajmy!
         </ButtonTeal>
       </VStack>
-    </StepAnimate>
+    </AnimateComponent>
   );
 };
 
@@ -152,7 +186,7 @@ const StepInterests = () => {
   } = useQuestionnaireState();
 
   return (
-    <StepAnimate>
+    <AnimateComponent>
       <VStack spacing={8}>
         <Heading as="h2" size="2xl">
           Jakie są twoje pasje i zainteresowania?
@@ -193,6 +227,6 @@ const StepInterests = () => {
           Dalej
         </ButtonTeal>
       </VStack>
-    </StepAnimate>
+    </AnimateComponent>
   );
 };

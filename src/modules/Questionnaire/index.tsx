@@ -23,6 +23,9 @@ import getJobSuggestion from "../../business_logic/getJobSuggestion";
 import { AnimateComponent } from "../../components/AnimateComponent";
 import { ReactComponent as PersonSvg } from "../../assets/walking_person.svg";
 import { ProfessionCard } from "../../components/ProfessionCard";
+import { ReactComponent as BgWave } from "../../assets/icons_wave_top.svg";
+import { ReactComponent as BgIconRight } from "../../assets/icons_bottom_right.svg";
+import { ReactComponent as BgIconLeft } from "../../assets/icons_bottom_left.svg";
 
 const flatOptions = getFlatOptions(disabilities);
 const ids = flatOptions.map(({ value }) => value);
@@ -33,17 +36,39 @@ export const QuestionnairePage = () => {
       {({ step }) => (
         <Page display="flex">
           {step === "result" ? (
-            <StepResult />
+            <>
+              <StepResult />
+              <Box
+                position="absolute"
+                top="60vh"
+                left="5%"
+                transform="rotate(90deg)"
+                zIndex={-1}
+              >
+                <BgIconLeft style={{ width: 230, height: 230 }} />
+              </Box>
+            </>
           ) : (
-            <Flex align="center" justify="center" textAlign="center" grow={1}>
-              {
+            <>
+              <Flex align="center" justify="center" textAlign="center" grow={1}>
                 {
-                  start: <StepStart />,
-                  interests: <StepInterests />,
-                  disabilities: <StepDisabilities />,
-                }[step]
-              }
-            </Flex>
+                  {
+                    start: <StepStart />,
+                    interests: <StepInterests />,
+                    disabilities: <StepDisabilities />,
+                  }[step]
+                }
+              </Flex>
+              <Box position="absolute" top="20%" right="18%" zIndex={-1}>
+                <BgWave style={{ width: 40, height: 40 }} />
+              </Box>
+              <Box position="absolute" bottom="10%" left="5%" zIndex={-1}>
+                <BgIconLeft style={{ width: 230, height: 230 }} />
+              </Box>
+              <Box position="absolute" bottom="10%" right="10%" zIndex={-1}>
+                <BgIconRight style={{ width: 230, height: 230 }} />
+              </Box>
+            </>
           )}
         </Page>
       )}
@@ -59,54 +84,54 @@ const StepResult = () => {
   });
 
   return (
-    <AnimateComponent>
+    <Box>
       <Box>
-        <Box>
+        <Box
+          position="absolute"
+          width="100vw"
+          height="100vh"
+          overflow="hidden"
+          top="0"
+          left="0"
+        >
           <Box
             position="absolute"
-            width="100vw"
-            height="100vh"
-            overflow="hidden"
+            left="calc(50% - 8rem)"
+            top="8rem"
+            zIndex={-1}
           >
-            <Box
-              position="absolute"
-              left="calc(50% - 8rem)"
-              top="8rem"
-              zIndex={-1}
-            >
-              <AnimateComponent transition={{ delay: 0.1 }}>
-                <PersonSvg />
-              </AnimateComponent>
-            </Box>
+            <AnimateComponent transition={{ delay: 0.1 }}>
+              <PersonSvg />
+            </AnimateComponent>
           </Box>
-          <AnimateComponent>
-            <Box py="16rem">
-              <Heading as="h2" size="2xl">
-                Zawody które do Ciebie pasują
-              </Heading>
-              <Text fontSize="xl" mt={4}>
-                Wybierz ten który Cię zainteresował i dowiedz się więcej.
-              </Text>
-            </Box>
-          </AnimateComponent>
         </Box>
-
-        <Grid templateColumns="repeat(2, 1fr)" gap={10}>
-          {suggestions.map((suggestion) => (
-            <GridItem rowSpan={1}>
-              <ProfessionCard key={suggestion.value}>
-                <Heading as="h4" size="xl" mb={4}>
-                  {suggestion.label}
-                </Heading>
-                <Text fontSize="md">
-                  {suggestion.description.substring(0, 200) + "..."}
-                </Text>
-              </ProfessionCard>
-            </GridItem>
-          ))}
-        </Grid>
+        <AnimateComponent>
+          <Box py="16rem">
+            <Heading as="h2" size="2xl">
+              Zawody które do Ciebie pasują
+            </Heading>
+            <Text fontSize="xl" mt={4}>
+              Wybierz ten który Cię zainteresował i dowiedz się więcej.
+            </Text>
+          </Box>
+        </AnimateComponent>
       </Box>
-    </AnimateComponent>
+
+      <Grid templateColumns="repeat(2, 1fr)" gap={10}>
+        {suggestions.map((suggestion) => (
+          <GridItem rowSpan={1}>
+            <ProfessionCard key={suggestion.value}>
+              <Heading as="h4" size="xl" mb={4}>
+                {suggestion.label}
+              </Heading>
+              <Text fontSize="md">
+                {suggestion.description.substring(0, 200) + "..."}
+              </Text>
+            </ProfessionCard>
+          </GridItem>
+        ))}
+      </Grid>
+    </Box>
   );
 };
 
